@@ -13,9 +13,9 @@ TODO configure rest template
 
 TODO create a service that will use rest template to perform API calls
 
-    BookRequest
-    BookResponse
-    BookResponseList
+    PaperRequest
+    PaperResponse
+    PaperResponseList
     RestTemplateClientService  
 
 ## interceptors
@@ -33,5 +33,5 @@ TODO test the rest template client
 ## how to run
 
 - start the server (spring-boot-rest/SpringBootRestApplication)
-  [book resource](http://localhost:8081/api/books)
+  [paper resource](http://localhost:8081/api/papers)
 - run RestTemplateClientServiceTest

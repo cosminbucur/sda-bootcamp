@@ -1,7 +1,7 @@
 package com.sda.testing.advanced;
 
-import com.sda.testing.advanced.model.Book;
-import com.sda.testing.advanced.repository.BookRepository;
+import com.sda.testing.advanced.model.Paper;
+import com.sda.testing.advanced.repository.PaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +15,7 @@ import java.util.List;
 public class SpringTestingApplication {
 
     @Autowired
-    private BookRepository bookRepository;
+    private PaperRepository paperRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringTestingApplication.class);
@@ -23,14 +23,14 @@ public class SpringTestingApplication {
 
     //    @Bean
     CommandLineRunner data() {
-        return args -> bookRepository.saveAll(createBooks());
+        return args -> paperRepository.saveAll(createPapers());
     }
 
-    private List<Book> createBooks() {
-        Book book = new Book();
-        book.setTitle("Game of thrones");
-        book.setAuthor("George Martin");
-        book.setPublished(LocalDate.now());
-        return Collections.singletonList(book);
+    private List<Paper> createPapers() {
+        Paper paper = new Paper();
+        paper.setTitle("Game of thrones");
+        paper.setAuthor("George Martin");
+        paper.setPublished(LocalDate.now());
+        return Collections.singletonList(paper);
     }
 }

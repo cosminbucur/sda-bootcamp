@@ -1,7 +1,7 @@
 package com.sda.testing.advanced.service;
 
-import com.sda.testing.advanced.dto.BookRequest;
-import com.sda.testing.advanced.dto.BookResponse;
+import com.sda.testing.advanced.dto.PaperRequest;
+import com.sda.testing.advanced.dto.PaperResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,47 +12,47 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class BookServiceIntegrationTest {
+class PaperServiceIntegrationTest {
 
     @Autowired
-    private BookService bookService;
+    private PaperService paperService;
 
     @Test
-    void givenBookRequest_whenSave_thenReturnBookResponse() {
+    void givenPaperRequest_whenSave_thenReturnPaperResponse() {
         // given
-        BookRequest request = new BookRequest();
+        PaperRequest request = new PaperRequest();
         request.setTitle("game of thrones");
         request.setAuthor("george martin");
         request.setPublished(LocalDate.of(2000, 6, 30));
 
-        BookResponse expected = new BookResponse();
+        PaperResponse expected = new PaperResponse();
         expected.setId(1L);
         expected.setTitle("game of thrones");
         expected.setAuthor("george martin");
         expected.setPublished(LocalDate.of(2000, 6, 30));
 
         // when
-        BookResponse actual = bookService.save(request);
+        PaperResponse actual = paperService.save(request);
 
         // then
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    void givenExistingBook_whenSave_thenThrowException() {
+    void givenExistingPaper_whenSave_thenThrowException() {
         // given
         // setup initial db state
-        BookRequest bookRequest = new BookRequest();
-        bookRequest.setTitle("game of thrones");
-        bookRequest.setAuthor("george martin");
-        bookRequest.setPublished(LocalDate.of(2000, 6, 30));
+        PaperRequest paperRequest = new PaperRequest();
+        paperRequest.setTitle("game of thrones");
+        paperRequest.setAuthor("george martin");
+        paperRequest.setPublished(LocalDate.of(2000, 6, 30));
 
-        bookService.save(bookRequest);
+        paperService.save(paperRequest);
 
         // then
         Assertions.assertThrows(RuntimeException.class,
                 // when
-                () -> bookService.save(bookRequest));
+                () -> paperService.save(paperRequest));
     }
 
     @Test
@@ -60,25 +60,25 @@ class BookServiceIntegrationTest {
     }
 
     @Test
-    void givenValidId_whenFindById_thenReturnBookResponse() {
+    void givenValidId_whenFindById_thenReturnPaperResponse() {
         // given
-        BookRequest bookRequest = new BookRequest();
-        bookRequest.setTitle("game of thrones");
-        bookRequest.setAuthor("george martin");
-        bookRequest.setPublished(LocalDate.of(2000, 6, 30));
+        PaperRequest paperRequest = new PaperRequest();
+        paperRequest.setTitle("game of thrones");
+        paperRequest.setAuthor("george martin");
+        paperRequest.setPublished(LocalDate.of(2000, 6, 30));
 
-        bookService.save(bookRequest);
+        paperService.save(paperRequest);
 
         // when
-        BookResponse actual = bookService.findById(1L);
+        PaperResponse actual = paperService.findById(1L);
 
-        assertThat(actual.getTitle()).isEqualTo(bookRequest.getTitle());
+        assertThat(actual.getTitle()).isEqualTo(paperRequest.getTitle());
     }
 
     @Test
     void givenInvalidId_whenFindById_thenThrowException() {
         Assertions.assertThrows(RuntimeException.class,
-                () -> bookService.findById(1L));
+                () -> paperService.findById(1L));
     }
 
     @Test

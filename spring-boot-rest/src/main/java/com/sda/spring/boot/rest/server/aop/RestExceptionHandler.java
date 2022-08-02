@@ -1,6 +1,6 @@
 package com.sda.spring.boot.rest.server.aop;
 
-import com.sda.spring.boot.rest.server.exception.DuplicateBookException;
+import com.sda.spring.boot.rest.server.exception.DuplicatePaperException;
 import com.sda.spring.boot.rest.server.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +25,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(DuplicateBookException.class)
-    public ResponseEntity<Object> handleDuplicateBookException(DuplicateBookException exception) {
+    @ExceptionHandler(DuplicatePaperException.class)
+    public ResponseEntity<Object> handleDuplicatePaperException(DuplicatePaperException exception) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("Timestamp: ", LocalDateTime.now());

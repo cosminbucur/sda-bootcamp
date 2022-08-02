@@ -21,16 +21,16 @@ TODO setup persistence config for tests using h2
 
 ## spring rest CRUD
 
-    Book
-    BookRepository
+    Paper
+    PaperRepository
     
-    BookRequest
-    BookResponse
-    BookMapper
+    PaperRequest
+    PaperResponse
+    PaperMapper
 
-    BookService
+    PaperService
     
-    BookController
+    PaperController
 
 # testing
 
@@ -38,27 +38,27 @@ TODO setup persistence config for tests using h2
 
 TODO unit test the dto
 
-    BookMapperTest
+    PaperMapperTest
 
 ## service test
 
 TODO unit test for the service layer
 
-    BookServiceTest
+    PaperServiceTest
         @ExtendWith(MockitoExtension.class)
         @Mock
         @InjectMocks
 
 TODO integration test for the service layer
 
-    BookServiceIntegrationTest
+    PaperServiceIntegrationTest
         @SpringBootTest
 
 ## controller test
 
 TODO unit test for controller layer
 
-    BookControllerTest
+    PaperControllerTest
 
 TODO integration test for controller layer using spring mock mvc
 

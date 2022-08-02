@@ -2,8 +2,8 @@ package com.sda.testing.advanced.controller;
 
 import com.sda.testing.advanced.SpringTestingApplication;
 import com.sda.testing.advanced.config.H2TestProfileJpaConfig;
-import com.sda.testing.advanced.dto.BookRequest;
-import com.sda.testing.advanced.service.BookService;
+import com.sda.testing.advanced.dto.PaperRequest;
+import com.sda.testing.advanced.service.PaperService;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,13 +28,13 @@ import static org.hamcrest.Matchers.equalTo;
 )
 class ControllerRestAssuredIntegrationTest {
 
-    private static final String API_BOOKS = "/books";
+    private static final String API_BOOKS = "/papers";
 
     @LocalServerPort
     public int port;
 
     @Autowired
-    BookService bookService;
+    PaperService paperService;
 
     @BeforeEach
     void setUp() {
@@ -48,11 +48,11 @@ class ControllerRestAssuredIntegrationTest {
 
     @Test
     void givenRequest_whenFindAll_thenReturn200() {
-        BookRequest request = new BookRequest();
+        PaperRequest request = new PaperRequest();
         request.setTitle("game of thrones");
         request.setAuthor("george martin");
         request.setPublished(LocalDate.of(2000, 6, 30));
-        bookService.save(request);
+        paperService.save(request);
 
         given()
                 .when()
@@ -69,7 +69,7 @@ class ControllerRestAssuredIntegrationTest {
     }
 
     @Test
-    void getBooksByAuthor() {
+    void getPapersByAuthor() {
     }
 
     @Test

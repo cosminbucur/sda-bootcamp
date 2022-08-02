@@ -54,7 +54,7 @@ public class DemoHowMaps {
     }
 
     private static void compareMaps() {
-        Map<String, String> hashMap = new TreeMap<>();
+        Map<String, String> hashMap = new HashMap<>();
         hashMap.put("Poland", "Warsaw");
         hashMap.put("Germany", "Berlin");
         printMap(hashMap);

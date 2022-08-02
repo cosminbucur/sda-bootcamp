@@ -1,7 +1,7 @@
 package com.sda.spring.resttemplate.service;
 
-import com.sda.spring.resttemplate.dto.BookRequest;
-import com.sda.spring.resttemplate.dto.BookResponse;
+import com.sda.spring.resttemplate.dto.PaperRequest;
+import com.sda.spring.resttemplate.dto.PaperResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,40 +20,40 @@ class RestTemplateClientServiceTest {
     @BeforeEach
     void setUp() {
         service.findAll().forEach(
-                bookResponse -> service.delete(bookResponse.getId())
+                paperResponse -> service.delete(paperResponse.getId())
         );
     }
 
     @Test
     void save() {
         // given
-        BookRequest bookRequest = new BookRequest();
-        bookRequest.setTitle("title");
-        bookRequest.setAuthor("author");
+        PaperRequest paperRequest = new PaperRequest();
+        paperRequest.setTitle("title");
+        paperRequest.setAuthor("author");
 
         // when
-        BookResponse savedBook = service.save(bookRequest);
+        PaperResponse savedPaper = service.save(paperRequest);
 
         // then
-        assertThat(savedBook).isNotNull();
+        assertThat(savedPaper).isNotNull();
     }
 
     @Test
     void findAll() {
         // given
-        BookRequest bookRequest1 = new BookRequest();
-        bookRequest1.setTitle("title1");
-        bookRequest1.setAuthor("author");
+        PaperRequest paperRequest1 = new PaperRequest();
+        paperRequest1.setTitle("title1");
+        paperRequest1.setAuthor("author");
 
-        BookRequest bookRequest2 = new BookRequest();
-        bookRequest2.setTitle("title2");
-        bookRequest2.setAuthor("author");
+        PaperRequest paperRequest2 = new PaperRequest();
+        paperRequest2.setTitle("title2");
+        paperRequest2.setAuthor("author");
 
-        BookResponse savedBook1 = service.save(bookRequest1);
-        BookResponse savedBook2 = service.save(bookRequest2);
+        PaperResponse savedPaper1 = service.save(paperRequest1);
+        PaperResponse savedPaper2 = service.save(paperRequest2);
 
         // when
-        List<BookResponse> actual = service.findAll();
+        List<PaperResponse> actual = service.findAll();
 
         // then
         assertThat(actual).hasSize(2);
@@ -62,14 +62,14 @@ class RestTemplateClientServiceTest {
     @Test
     void findById() {
         // given
-        BookRequest bookRequest = new BookRequest();
-        bookRequest.setTitle("title");
-        bookRequest.setAuthor("author");
+        PaperRequest paperRequest = new PaperRequest();
+        paperRequest.setTitle("title");
+        paperRequest.setAuthor("author");
 
-        BookResponse savedBook = service.save(bookRequest);
+        PaperResponse savedPaper = service.save(paperRequest);
 
         // when
-        BookResponse actual = service.findById(savedBook.getId());
+        PaperResponse actual = service.findById(savedPaper.getId());
 
         // then
         assertThat(actual.getTitle()).isEqualTo("title");
@@ -78,33 +78,33 @@ class RestTemplateClientServiceTest {
     @Test
     void update() {
         // given
-        BookRequest bookRequest = new BookRequest();
-        bookRequest.setTitle("title");
-        bookRequest.setAuthor("author");
+        PaperRequest paperRequest = new PaperRequest();
+        paperRequest.setTitle("title");
+        paperRequest.setAuthor("author");
 
-        BookResponse savedBook = service.save(bookRequest);
+        PaperResponse savedPaper = service.save(paperRequest);
 
-        BookRequest updateRequest = new BookRequest();
+        PaperRequest updateRequest = new PaperRequest();
         updateRequest.setTitle("title2");
         updateRequest.setAuthor("author2");
 
         // when
-        service.update(savedBook.getId(), updateRequest);
-        BookResponse updatedBook = service.findById(savedBook.getId());
+        service.update(savedPaper.getId(), updateRequest);
+        PaperResponse updatedPaper = service.findById(savedPaper.getId());
 
         // then
-        assertThat(updatedBook.getTitle()).isEqualTo("title2");
+        assertThat(updatedPaper.getTitle()).isEqualTo("title2");
     }
 
     @Test
     void delete() {
-        BookRequest bookRequest = new BookRequest();
-        bookRequest.setTitle("title");
-        bookRequest.setAuthor("author");
-        BookResponse savedBook = service.save(bookRequest);
+        PaperRequest paperRequest = new PaperRequest();
+        paperRequest.setTitle("title");
+        paperRequest.setAuthor("author");
+        PaperResponse savedPaper = service.save(paperRequest);
 
         // when
-        service.delete(savedBook.getId());
+        service.delete(savedPaper.getId());
 
         assertThat(service.findAll()).isEmpty();
     }

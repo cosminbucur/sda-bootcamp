@@ -1,10 +1,10 @@
 package com.sda.testing.advanced.service;
 
-import com.sda.testing.advanced.dto.BookMapper;
-import com.sda.testing.advanced.dto.BookRequest;
-import com.sda.testing.advanced.dto.BookResponse;
-import com.sda.testing.advanced.model.Book;
-import com.sda.testing.advanced.repository.BookRepository;
+import com.sda.testing.advanced.dto.PaperMapper;
+import com.sda.testing.advanced.dto.PaperRequest;
+import com.sda.testing.advanced.dto.PaperResponse;
+import com.sda.testing.advanced.model.Paper;
+import com.sda.testing.advanced.repository.PaperRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,74 +20,74 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class BookServiceTest {
+class PaperServiceTest {
 
     @Mock
-    private BookRepository bookRepository;
+    private PaperRepository paperRepository;
 
     @Mock
-    private BookMapper bookMapper;
+    private PaperMapper paperMapper;
 
     @InjectMocks
-    private BookService bookService;
+    private PaperService paperService;
 
     @Test
-    void givenBookRequest_whenSave_thenReturnBookResponse() {
+    void givenPaperRequest_whenSave_thenReturnPaperResponse() {
         // given
-        BookRequest request = new BookRequest();
+        PaperRequest request = new PaperRequest();
         request.setTitle("game of thrones");
         request.setAuthor("george martin");
         request.setPublished(LocalDate.of(2000, 6, 30));
 
-        Book mockBook = new Book();
-        mockBook.setId(1L);
-        mockBook.setTitle("game of thrones");
-        mockBook.setAuthor("george martin");
-        mockBook.setPublished(LocalDate.of(2000, 6, 30));
+        Paper mockPaper = new Paper();
+        mockPaper.setId(1L);
+        mockPaper.setTitle("game of thrones");
+        mockPaper.setAuthor("george martin");
+        mockPaper.setPublished(LocalDate.of(2000, 6, 30));
 
-        BookResponse expected = new BookResponse();
+        PaperResponse expected = new PaperResponse();
         expected.setId(1L);
         expected.setTitle("game of thrones");
         expected.setAuthor("george martin");
         expected.setPublished(LocalDate.of(2000, 6, 30));
 
-        when(bookRepository.findByTitle(anyString()))
-                .thenReturn(mockBook);
-        when(bookMapper.toEntity(any(BookRequest.class)))
-                .thenReturn(mockBook);
-        when(bookRepository.save(any(Book.class)))
-                .thenReturn(mockBook);
-        when(bookMapper.toDto(any(Book.class)))
+        when(paperRepository.findByTitle(anyString()))
+                .thenReturn(mockPaper);
+        when(paperMapper.toEntity(any(PaperRequest.class)))
+                .thenReturn(mockPaper);
+        when(paperRepository.save(any(Paper.class)))
+                .thenReturn(mockPaper);
+        when(paperMapper.toDto(any(Paper.class)))
                 .thenReturn(expected);
 
         // when
-        BookResponse actual = bookService.save(request);
+        PaperResponse actual = paperService.save(request);
 
         // then
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    void givenExistingBook_whenSave_thenThrowException() {
+    void givenExistingPaper_whenSave_thenThrowException() {
         // given
-        BookRequest bookRequest = new BookRequest();
-        bookRequest.setTitle("game of thrones");
-        bookRequest.setAuthor("george martin");
-        bookRequest.setPublished(LocalDate.of(2000, 6, 30));
+        PaperRequest paperRequest = new PaperRequest();
+        paperRequest.setTitle("game of thrones");
+        paperRequest.setAuthor("george martin");
+        paperRequest.setPublished(LocalDate.of(2000, 6, 30));
 
-        BookResponse expected = new BookResponse();
+        PaperResponse expected = new PaperResponse();
         expected.setId(1L);
         expected.setTitle("game of thrones");
         expected.setAuthor("george martin");
         expected.setPublished(LocalDate.of(2000, 6, 30));
 
-        when(bookRepository.findByTitle(anyString()))
+        when(paperRepository.findByTitle(anyString()))
                 .thenReturn(null);
 
         // then
         Assertions.assertThrows(RuntimeException.class,
                 // when
-                () -> bookService.save(bookRequest));
+                () -> paperService.save(paperRequest));
     }
 
     @Test
@@ -95,29 +95,29 @@ class BookServiceTest {
     }
 
     @Test
-    void givenValidId_whenFindById_thenReturnBookResponse() {
+    void givenValidId_whenFindById_thenReturnPaperResponse() {
         // given
-        Book book = new Book();
-        book.setId(1L);
-        book.setTitle("game of thrones");
-        book.setAuthor("george martin");
-        book.setPublished(LocalDate.of(2000, 6, 30));
+        Paper paper = new Paper();
+        paper.setId(1L);
+        paper.setTitle("game of thrones");
+        paper.setAuthor("george martin");
+        paper.setPublished(LocalDate.of(2000, 6, 30));
 
-        Optional<Book> mockBook = Optional.of(book);
+        Optional<Paper> mockPaper = Optional.of(paper);
 
-        BookResponse mockResponse = new BookResponse();
+        PaperResponse mockResponse = new PaperResponse();
         mockResponse.setId(2L);
         mockResponse.setTitle("game of thrones2");
         mockResponse.setAuthor("george martin2");
         mockResponse.setPublished(LocalDate.of(2000, 6, 30));
 
-        when(bookRepository.findById(anyLong()))
-                .thenReturn(mockBook);
-        when(bookMapper.toDto(any(Book.class)))
+        when(paperRepository.findById(anyLong()))
+                .thenReturn(mockPaper);
+        when(paperMapper.toDto(any(Paper.class)))
                 .thenReturn(mockResponse);
 
         // when
-        BookResponse actual = bookService.findById(1L);
+        PaperResponse actual = paperService.findById(1L);
 
         assertThat(actual).isEqualTo(mockResponse);
     }
@@ -139,7 +139,7 @@ class BookServiceTest {
         // assert
 
         Assertions.assertThrows(RuntimeException.class,
-                () -> bookService.findById(1L));
+                () -> paperService.findById(1L));
     }
 
     @Test

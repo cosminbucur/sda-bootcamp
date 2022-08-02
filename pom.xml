@@ -22,6 +22,9 @@
         <module>spring-boot</module>
 
         <!-- persistence -->
+        <module>jdbc</module>
+        <module>hibernate</module>
+        <module>spring-data-jpa</module>
 
         <!-- web -->
         <module>spring-boot-rest</module>

@@ -15,30 +15,30 @@ TODO configure h2 database and enable console
 
 TODO create a spring rest controller
 
-    Book
-    BookRepository
+    Paper
+    PaperRepository
 
-    BookRequest
-    BookResponse
-    BookMapper    
+    PaperRequest
+    PaperResponse
+    PaperMapper    
 
-    BookService
+    PaperService
     
-    BookController
+    PaperController
 
 ## validation
 
 TODO validate dto using @Valid
 
-    BookRequest
-    BookService
+    PaperRequest
+    PaperService
 
 ## rest exception handling
 
 TODO add global exception handler
 
     NotFoundException
-    DuplicateBookException
+    DuplicatePaperException
     RestExceptionHandler
 
 ## CORS

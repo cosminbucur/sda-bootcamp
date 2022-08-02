@@ -2,8 +2,8 @@ package com.sda.testing.advanced.controller;
 
 import com.sda.testing.advanced.SpringTestingApplication;
 import com.sda.testing.advanced.config.H2TestProfileJpaConfig;
-import com.sda.testing.advanced.dto.BookRequest;
-import com.sda.testing.advanced.service.BookService;
+import com.sda.testing.advanced.dto.PaperRequest;
+import com.sda.testing.advanced.service.PaperService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,14 +31,14 @@ class ControllerMockMvcIntegrationTest {
     @LocalServerPort
     private static final int port = 8083;
 
-    private static final String API_BOOKS = "/books";
+    private static final String API_BOOKS = "/papers";
     private static final String BASE_URI = "http://localhost:" + port + "/api";
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private BookService bookService;
+    private PaperService paperService;
 
     @BeforeEach
     void setUp() {
@@ -50,11 +50,11 @@ class ControllerMockMvcIntegrationTest {
 
     @Test
     void givenRequest_whenFindAll_thenReturn200() throws Exception {
-        BookRequest request = new BookRequest();
+        PaperRequest request = new PaperRequest();
         request.setTitle("game of thrones");
         request.setAuthor("george martin");
         request.setPublished(LocalDate.of(2000, 6, 30));
-        bookService.save(request);
+        paperService.save(request);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_URI + "/" + API_BOOKS)).
@@ -73,7 +73,7 @@ class ControllerMockMvcIntegrationTest {
     }
 
     @Test
-    void getBooksByAuthor() {
+    void getPapersByAuthor() {
     }
 
     @Test
