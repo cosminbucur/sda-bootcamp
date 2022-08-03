@@ -6,7 +6,12 @@
 # JPA
 
 java persistence api (Jakarta)
-EntityManagerFactory EntityManager Entity Query TransactionManager EntityTransaction
+- EntityManagerFactory
+- EntityManager
+- Entity
+- Query
+- TransactionManager
+- EntityTransaction
 
 # Hibernate
 

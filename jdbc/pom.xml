@@ -11,12 +11,15 @@
 
     <artifactId>jdbc</artifactId>
 
+    <properties>
+        <postgresql.version>42.2.19</postgresql.version>
+    </properties>
+
     <dependencies>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-            <scope>runtime</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
     </dependencies>
 
