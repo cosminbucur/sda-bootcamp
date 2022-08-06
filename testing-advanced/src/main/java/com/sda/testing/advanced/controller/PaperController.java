@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping(PaperController.API_BOOKS)
+@RequestMapping(PaperController.API_PAPERS)
 @RestController
 public class PaperController {
 
-    public static final String API_BOOKS = "/api/papers";
+    public static final String API_PAPERS = "/api/papers";
     private final PaperService paperService;
 
     @Autowired
